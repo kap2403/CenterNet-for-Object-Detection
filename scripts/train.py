@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Add the project root directory to the sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import numpy as np
 import matplotlib.pyplot as plt
 import json
@@ -8,11 +14,12 @@ import torchvision
 from torchvision import transforms
 import torch.nn.functional as F
 import torch.optim as optim
+
 from dataloader.dataset import Dataset
-from models.centernet import centernet
+from models.centernet import CenterNet
 from loss import centerloss
 
-folder_path = "data"
+
 
 # Load configuration from config.json
 with open("dataloader/config.json", "r") as config_file:
@@ -23,29 +30,34 @@ MODEL_SCALE = config["MODEL_SCALE"]
 input_size = config["input_size"]
 batch_size = config["batch_size"]
 in_scale = config["IN_SCALE"]
-folder_path = "data"
+folder_path = r"F:\datasets\semester project licience plate data\dataset"
 
-# Define transforms
 train_transform = transforms.Compose([
-    transforms.Resize((512, 512)),
     transforms.ToTensor(),
+    transforms.Resize((512, 512)),
 ])
 
 # Dataset and data loaders
-dataset = Dataset(folder_path, input_size=input_size, model_scale=MODEL_SCALE, in_scale=in_scale, transform=train_transform)
+dataset = Dataset(input_size=input_size, 
+                  model_scale=MODEL_SCALE, 
+                  in_scale=in_scale, 
+                  folder_path=folder_path, 
+                  transform=train_transform)
 
+print(len(dataset))
 # Adjust train-test split sizes based on your dataset size
-train_set, test_set = torch.utils.data.random_split(dataset, [51, len(dataset) - 51])
+train_set, test_Set = torch.utils.data.random_split(dataset, [51,600])
+
+print(len(train_set))
 
 train_loader = torch.utils.data.DataLoader(
     train_set, batch_size=1, shuffle=True, num_workers=0
 )
-test_loader = torch.utils.data.DataLoader(
-    test_set, batch_size=1, shuffle=True, num_workers=0
+test_loader=torch.utils.data.DataLoader(
+    test_Set, batch_size=1, shuffle=True, num_workers=0
 )
-
 # Model, device, and optimizer
-model = centernet()
+model = CenterNet()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 

@@ -10,7 +10,7 @@ import torch.nn as nn
 import torchvision
 from torchvision import transforms
 from dataloader.dataset import Dataset
-from models.centernet import centernet
+from models.centernet import CenterNet
 
 
 # Load configuration from config.json
@@ -28,13 +28,16 @@ folder_path = "data"
 
 # Define transforms
 train_transform = transforms.Compose([
-    transforms.Resize((512, 512)),
     transforms.ToTensor(),
+    transforms.Resize((512, 512)),
 ])
 
 # Dataset and data loaders
-dataset = Dataset(folder_path, input_size=input_size, model_scale=MODEL_SCALE, in_scale=in_scale, transform=train_transform)
-
+dataset = Dataset(input_size=input_size, 
+                  model_scale=MODEL_SCALE, 
+                  in_scale=in_scale, 
+                  folder_path=folder_path, 
+                  transform=train_transform)
 
 # Adjust train-test split sizes based on your dataset size
 train_set, test_set = torch.utils.data.random_split(dataset, [51, len(dataset) - 51])
@@ -98,7 +101,7 @@ def showgtbox(img, hm, regr, thresh=0.9):
         )
     return sample
 
-model = centernet()
+model = CenterNet()
 model = model.load_state_dict(torch.load(MODEL_PATH))
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
