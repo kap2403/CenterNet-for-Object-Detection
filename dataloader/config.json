@@ -1,0 +1,9 @@
+{
+    "MODEL_PATH": "",
+    "input_size": 512,
+    "IN_SCALE": 2,
+    "MODEL_SCALE": 4,
+    "batch_size": 2,
+    "model_name": "resnet18",
+    "TRAIN": true
+}
