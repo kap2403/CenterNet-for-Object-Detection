@@ -30,8 +30,7 @@ MODEL_SCALE = config["MODEL_SCALE"]
 input_size = config["input_size"]
 batch_size = config["batch_size"]
 in_scale = config["IN_SCALE"]
-folder_path = r"F:\datasets\semester project licience plate data\dataset"
-
+folder_path = "data"
 train_transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Resize((512, 512)),
