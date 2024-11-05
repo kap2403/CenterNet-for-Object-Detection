@@ -1,0 +1,41 @@
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environment directories
+venv/
+env/
+*.egg-info/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore temporary editor files (e.g., VSCode, Sublime)
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Ignore test coverage directory
+.coverage
+*.cover
+
+# Ignore other unwanted directories or files
+*.bak
+*.swp
+*.tmp
+
+# Ignore build and distribution directories
+build/
+dist/
+*.egg
+*.tar.gz
+*.whl
