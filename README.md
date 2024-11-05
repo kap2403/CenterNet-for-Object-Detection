@@ -160,5 +160,3 @@ python test.py --test_dir path_to_test_images
 ---
 
 This README provides a comprehensive guide to using, training, and evaluating the CenterNet-based object detection model. You can adapt the configuration and scripts for your specific dataset and task.
-
-Let me know if you need further details or additional explanations!
