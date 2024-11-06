@@ -1,5 +1,3 @@
-Certainly! Below is a sample **README** file that you can use to describe the purpose, setup, and usage of the CenterNet model you implemented.
-
 ---
 
 # CenterNet for Object Detection
